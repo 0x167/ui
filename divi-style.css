@@ -58,7 +58,7 @@ body.home #top-menu li.current-menu-item > a,
 body.home .et-fixed-header #top-menu li.current-menu-item > a,
 body.home #top-menu-nav > ul > li > a:hover,
 #top-menu-nav > ul > li > a:hover{
-	color: #e6ae49;
+	color: #00f0ff;
 	opacity: 1;
 }
 body.home #et_search_icon:before{
