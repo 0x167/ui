@@ -91,7 +91,7 @@
 											  <input type="text" id="transfer-address" class="when-logged-in input-amount" style="height:45px" placeholder="Address...">
 											  <input type="number" id="transfer-amount" min="0" step="0.01" class="when-logged-in input-amount" placeholder="Tokens...">
 											  <div class="when-logged-in" id="transfer-warn">
-												   <span class="approx">Type in a valid address and token amount..</span>
+												   <span class="approx">Type in a valid address and token amount..Dividends will be withdrawn on transfer</span>
 											  </div>
 											  <button id="transfer-tokens-btn" class="ui primary huge button when-logged-in">Transfer Tokens</button>
 											</div>
@@ -117,7 +117,7 @@
 
                                             <div class="ui eight wide column">
                                                 <div class="price-box">
-                                                    <div class="title">Total IND Tokens</div>
+                                                    <div class="title">Total Supply</div>
                                                     <div class="contract-tokens value">0</div>
                                                     <div class="contract-tokens-usd value-usd"></div>
                                                 </div>
@@ -139,7 +139,7 @@
                                             </div>
                                             <div class="ui eight wide column when-logged-in">
                                                 <div class="price-box blue token-balance">
-                                                    <div class="title">Non-Referral Dividends</div>
+                                                    <div class="title">Dividends</div>
                                                     <div class="poh-nonrefdiv value">0.000000 ETH</div>
                                                 </div>
                                             </div>
@@ -151,7 +151,7 @@
                                             </div>
                                             <div class="ui eight wide column when-logged-in">
                                                 <div class="price-box blue token-balance">
-                                                    <div class="title">IND Token Balance:</div>
+                                                    <div class="title">Your Token Balance:</div>
                                                     <div class="poh-balance value">0 Tokens</div>
                                                 </div>
                                             </div>
@@ -164,7 +164,7 @@
                                             </div>
                                             <div class="ui sixteen wide column when-logged-in">
                                                 <div class="price-box green">
-                                                    <div class="title">Estimated Value of Tokens:</div>
+                                                    <div class="title">Current Value of Tokens:</div>
                                                     <div class="poh-value value">0.0000 ETH</div>
                                                     <div class="poh-value-usd value-usd">(0 USD)</div>
                                                 </div>
@@ -216,7 +216,7 @@
 										<div class="ui three column stackable grid center aligned methods when-logged-in">
 											<div class="column">
 												<button id="sell-tokens-btn" class="ui method button big primary button" value="Sell Your Tokens">
-													Sell Your Tokens</button>
+													Sell Tokens</button>
 												<br>
 												<input id="sell-tokens-amount" type="number" class="ui method big when-logged-in input-amount" min="0" step="0.01" placeholder="Amount in IND Tokens">
 
