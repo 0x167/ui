@@ -101,13 +101,16 @@ function updateEthPrice () {
     ethPrice = 1 / (sellPrice + ((buyPrice - sellPrice) / 2))
     ethPriceTimer = setTimeout(updateEthPrice, 10000)
   } else {
-    $.getJSON('https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=' + currency, function (result) {
-      var eth = result[0]
-      ethPrice = parseFloat(eth['price_' + currency.toLowerCase()])
+    $.getJSON('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=' + currency, function (result) {
+      //var eth = result["ethereum"]
+	  for (var key in result.ethereum) {
+		  var eth = result.ethereum[key]
+	  }
+
+      ethPrice = parseFloat(eth + currency.toLowerCase())
       ethPriceTimer = setTimeout(updateEthPrice, 10000)
     })
   }
-}
 
 function convertEthToWei (e) {
   return 1e18 * e
