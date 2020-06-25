@@ -172,6 +172,7 @@
 
 .price-box.green, .login-box.green {
     background: #eee;
+	border: 2px solid #6DC2DD;
 }
 
 .price-box .title, .login-box .title {
