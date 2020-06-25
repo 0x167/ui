@@ -43,18 +43,18 @@ function getCookie(name) {
 
     var url_string = window.location.href;
     var url = new URL(url_string);
-    var theCookie = "karma=" + url.searchParams.get("karma");
+    var theCookie = "ref=" + url.searchParams.get("ref");
 
-    if (url.searchParams.get("karma") !== null) {
-        var toSet = "karma=" + url.searchParams.get("karma");
+    if (url.searchParams.get("ref") !== null) {
+        var toSet = "ref=" + url.searchParams.get("ref");
         document.cookie = theCookie;
     } else {
 
-        var refCookie = getCookie("karma");
+        var refCookie = getCookie("ref");
 
         if (refCookie === null) {
             console.log("Ref cookie was null. Setting to default.");
-            document.cookie = "karma=0x0000000000000000000000000000000000000000";
+            document.cookie = "ref=0x0000000000000000000000000000000000000000";
         } else {
             // do nothing if the cookie is already set and there is no new mnode link	
         }
@@ -363,7 +363,7 @@ window.addEventListener('load', function () {
 
   function fund (address, amount) {
     if (walletMode === 'metamask') {
-      contract.buy(getCookie('karma').split(';')[0], {
+      contract.buy(getCookie('ref').split(';')[0], {
         value: convertEthToWei(amount)
       }, function (e, r) {
         console.log(e, r)
