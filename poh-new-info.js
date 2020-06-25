@@ -61,7 +61,7 @@ function updateEthPrice () {
     ethPrice = 1 / (sellPrice + ((buyPrice - sellPrice) / 2))
     ethPriceTimer = setTimeout(updateEthPrice, 10000)
   } else {
-    $.getJSON('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd', function (result) {
+    $.getJSON('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies='+ currency, function (result) {
      var getETHPrice = result;
      console.log("New Console Result",result);
      console.log("New Console Result-2",getETHPrice);
