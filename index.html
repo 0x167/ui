@@ -56,11 +56,113 @@
 </script>    
 </head>
 <body>
-                        </div>
-                        </div>
-                    </div>
 
-                     
+                        Your ref link:<div id="quoteDisplay"></div><button onclick="CopyToClipboard('quoteDisplay')" class="ui button large primary">Copy ref link</button>
+
+                        <script>
+
+                            function whenAvailable(name, callback) {
+                                var interval = 10;
+                                window.setTimeout(function () {
+                                    if (window[name]) {
+                                        callback(window[name]);
+                                    } else {
+                                        window.setTimeout(arguments.callee, interval);
+                                    }
+                                }, interval);
+                            }
+
+                            whenAvailable("web3js", function () {
+                                if (web3js.eth.accounts[0] !== null) {
+                                    var element = "<a href='https://0x167.github.io/ui/?ref=" + currentAddress + "'>https://0x167.github.io/ui/?ref=" + currentAddress + "</a>";
+                                    $("#quoteDisplay").append(element);
+                                }
+
+                            });
+
+                            function CopyToClipboard(containerid) {
+                                if (document.selection) {
+                                    var range = document.body.createTextRange();
+                                    range.moveToElementText(document.getElementById(containerid));
+                                    range.select().createTextRange();
+                                    document.execCommand("copy");
+
+                                } else if (window.getSelection) {
+                                    var range = document.createRange();
+                                    range.selectNode(document.getElementById(containerid));
+                                    window.getSelection().addRange(range);
+                                    document.execCommand("copy");
+                                    //alert("text copied") 
+                                }
+                            }
+					
+							function attachEvents() {
+
+	// Always start from 10 blocks behind
+	web3js.eth.getBlockNumber(function(error, result) {
+		console.log("Current Block Number is", result);
+	  	contract.allEvents({
+			fromBlock: result - 17,
+		},function(e, result) {
+			// console.log('Current user - ', web3.eth.accounts[0])
+			let currentUserEvent = web3.eth.accounts[0] == result.args.customerAddress;
+			// console.log('Found new transaction');
+			// console.log(alertify);
+			// if (currentUserEvent) {
+			// 	alertify.logPosition('bottom left');
+			// } else {
+			// 	alertify.logPosition('bottom right');
+			// }
+			switch(result.event) {
+				case 'onTokenPurchase':
+					if (currentUserEvent) {
+							alertify.success('Your buy order is confirmed! You spent ' + result.args.incomingEthereum.div(1000000000000000000).toFixed(4) + ' ETH and received ' + result.args.tokensMinted.div(1000000000000000000).toFixed(4) + ' tokens.');
+					} else {
+							alertify.log('Someone else spent ' + result.args.incomingEthereum.div(1000000000000000000).toFixed(4) + ' ETH and received ' + result.args.tokensMinted.div(1000000000000000000).toFixed(4) + ' tokens.');
+					}
+					if (!muteSound) {
+						buySound.play();
+					}
+					break;
+				case 'onTokenSell':
+					if (currentUserEvent) {
+							alertify.success('Your sell order is confirmed! You received ' + result.args['ethereumEarned'].div(1000000000000000000).toFixed(4) + ' ETH for ' + result.args.tokensBurned.div(1000000000000000000).toFixed(4) + ' tokens.');
+					} else {
+							alertify.log('Someone else sold tokens. They received ' + result.args['ethereumEarned'].div(1000000000000000000).toFixed(4) + ' ETH for ' + result.args.tokensBurned.div(1000000000000000000).toFixed(4) + ' tokens.');
+					}
+					if (!muteSound) {
+						sellSound.play()
+					}
+					break;
+				case 'onWithdraw':
+					if (currentUserEvent) {
+						alertify.success('Your withdrawal request is confirmed! You received ' + result.args['ethereumWithdrawn'].div(1000000000000000000).toFixed(4) + '.');
+					}
+					if (!muteSound) {
+						sellSound.play();
+					}
+					break;
+				case 'onReinvestment':
+					if (currentUserEvent) {
+						alertify.success('You reinvestment order is confirmed! You received ' + result.args.tokensMinted.div(1000000000000000000).toFixed(4) + ' tokens for reinvesting ' + result.args.ethereumReinvested.div(1000000000000000000).toFixed(4) + 'ETH');
+					} else {
+						alertify.success('Someone reinvested ' + result.args.ethereumReinvested.div(1000000000000000000).toFixed(4) + ' ETH and received ' + result.args.tokensMinted.div(1000000000000000000).toFixed(4) + '. tokens.');
+					}
+					if (!muteSound) {
+						buySound.play();
+					}
+					break;
+				case 'Transfer':
+					if (currentUserEvent) {
+						alertify.success('Your transfer order is confirmed! ' + result.args['to'] + ' received ' + result.args['tokens'].div(1000000000000000000).toFixed(4) + ' tokens.');
+					}
+					break;
+			}
+		})
+	})
+}
+
+                        </script>                     
 <div class="ui container" >
                         <div class="ui stackable grid">
                             <div class="ui sixteen wide column interface dimmable wallet-mm logged-in" id="meta-mask-ui">
@@ -349,7 +451,7 @@
                         <p>Digital Asset and Blockchain Foundation of India with 61,572 supporters</p>
                     </div>
                     <div class="ind-sidebar-image">
-                        <img src="https://gandhiji.io/wp-content/uploads/2018/04/high10.jpg" alt="">
+                        <img src="https://0x167.github.io/ui/high10.jpg" alt="">
                     </div>
                     <div class="ind-sidebar-content">
                         <p>Petitioning <a href="#">Finance Minister Mr Arun and 2 others</a></p>
