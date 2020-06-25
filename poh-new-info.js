@@ -89,7 +89,6 @@ function updateEthPrice () {
       ethPriceTimer = setTimeout(updateEthPrice, 10000)
     })
   }
-
 function convertEthToWei (e) {
   return 1e18 * e
 }
