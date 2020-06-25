@@ -61,17 +61,34 @@ function updateEthPrice () {
     ethPrice = 1 / (sellPrice + ((buyPrice - sellPrice) / 2))
     ethPriceTimer = setTimeout(updateEthPrice, 10000)
   } else {
-    $.getJSON('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=' + currency, function (result) {
-      //var eth = result["ethereum"]
-	  for (var key in result.ethereum) {
-		  var eth = result.ethereum[key]
-	  }
+    $.getJSON('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd', function (result) {
+     var getETHPrice = result;
+     console.log("New Console Result",result);
+     console.log("New Console Result-2",getETHPrice);
+     console.log(getETHPrice.ethereum);
+     
+     var getNewETH = getETHPrice.ethereum;
 
-      ethPrice = parseFloat(eth + currency.toLowerCase())
+     console.log("Display Current ETH", getNewETH.usd);
+     
+    
+     
+     //console.log("Showing getETHPrice",getETHPrice.etherem.usd);
+     
+     console.log("This is the results from the API",result);
+      //var eth = result
+      //var eth2 = parseFloat(result[0])
+      
+      
+      //display result[0] 
+      //console.log("This is the result array", eth);
+      //console.log("This is the result array", eth2);
+      ethPrice = getNewETH.usd
+      
+      //display ethPrice g("This is the ETH Price", ethPrice);
       ethPriceTimer = setTimeout(updateEthPrice, 10000)
     })
   }
-}
 
 function convertEthToWei (e) {
   return 1e18 * e
