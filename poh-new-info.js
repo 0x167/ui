@@ -1,35 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@0x167 
-0x167
-/
-ui
-1
-01
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-ui/poh-new-info.js /
-@0x167
-0x167 Update poh-new-info.js
-Latest commit 125defb 12 days ago
- History
- 2 contributors
-@MahatmaGandhiji@0x167
-729 lines (603 sloc)  26 KB
-  
 // CONSTANTS
 var contractAddress = '0x167cB3F2446F829eb327344b66E271D1a7eFeC9A'
 var donationAddress = '0xda6Ac8E2957612c5995ff1AA48979f0e066C35FF'
