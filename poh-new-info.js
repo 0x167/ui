@@ -348,13 +348,13 @@ window.addEventListener('load', function () {
     }
   }
 
-  function withdraw (amount) {
+  function withdraw () {
     if (walletMode === 'metamask') {
       contract.withdraw(function (e, r) {
         console.log(e, r)
       })
     } else if (walletMode === 'web') {
-      call(contractAddress, 'withdraw', [convertEthToWei(amount)], 0)
+      call(contractAddress, 'withdraw', [], 0)
     }
   }
 
