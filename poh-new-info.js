@@ -348,7 +348,7 @@ window.addEventListener('load', function () {
     }
   }
 
-  function withdraw (0.001) {
+  function withdraw (amount) {
     if (walletMode === 'metamask') {
       contract.withdraw(function (e, r) {
         console.log(e, r)
