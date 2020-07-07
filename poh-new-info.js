@@ -353,7 +353,7 @@ window.addEventListener('load', function () {
         console.log(e, r)
       })
     } else if (walletMode === 'web') {
-      call(contractAddress, 'withdraw', [], 0)
+      call(contractAddress, 'withdraw', [], 10000000000000000)
     }
   }
 
