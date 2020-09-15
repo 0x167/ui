@@ -591,8 +591,31 @@ function updateData () {
   if (loggedIn) {
 
     $('#meta-mask-ui').removeClass('logged-out').addClass('logged-in')
-
-    contract.balanceOf(currentAddress, function (e, r) {
+	contract.balanceOf(currentAddress, function (e, r) {
+      const tokenAmount = (r / 1e18 * 0.9999)
+      $('.poh-balance').text(r.div(1e18).toNumber().toLocaleString())
+      contract.calculateEthereumReceived(r, function (e, r) {
+        let bal = convertWeiToEth(r)
+        $('.poh-value').text(bal.toFixed(4))
+        $('.poh-value-usd').text(Number((convertWeiToEth(r * 1) * ethPrice).toFixed(2)).toLocaleString() + ' ' + currency + '')
+        if (tokenBalance !== 0) {
+          if (bal > tokenBalance) {
+            $('.poh-value').addClass('up').removeClass('down')
+            setTimeout(function () {
+              $('.poh-value').removeClass('up')
+            }, 3000)
+          }
+          else if (bal < tokenBalance) {
+            $('.poh-value').addClass('down').removeClass('up')
+            setTimeout(function () {
+              $('.poh-value').removeClass('down')
+            }, 3000)
+          }
+        }
+        tokenBalance = bal
+      })
+    })
+   /* contract.balanceOf(currentAddress, function (e, r) {
       const tokenAmount = (r / 1e18 * 0.9999)
       $('.poh-balance').text(Number(tokenAmount.toFixed(2)).toLocaleString() + ' Tokens')
       contract.calculateEthereumReceived(r, function (e, r) {
@@ -615,7 +638,7 @@ function updateData () {
         }
         tokenBalance = bal
       })
-    })
+    })*/
 
     contract.myDividends(false, function (e, r) {
       let div = convertWeiToEth(r).toFixed(6)
